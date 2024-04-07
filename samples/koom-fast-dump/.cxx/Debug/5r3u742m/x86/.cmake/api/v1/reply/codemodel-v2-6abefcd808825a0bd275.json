@@ -1,0 +1,59 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4.1"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "koom-fast-dump",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "koom-fast-dump::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-koom-fast-dump-Debug-e8be8efb092e711004d6.json",
+					"name" : "koom-fast-dump",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/hardy/AndroidStudioProjects/github/mine/KOOM_LE/koom-fast-dump/.cxx/Debug/5r3u742m/x86",
+		"source" : "/Users/hardy/AndroidStudioProjects/github/mine/KOOM_LE/koom-fast-dump/src/main/cpp"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 1
+	}
+}

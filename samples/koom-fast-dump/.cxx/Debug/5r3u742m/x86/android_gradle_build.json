@@ -1,0 +1,38 @@
+{
+  "buildFiles": [
+    "/Users/hardy/AndroidStudioProjects/github/mine/KOOM_LE/koom-fast-dump/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/hardy/Library/Android/sdk/cmake/3.18.1/bin/ninja",
+      "-C",
+      "/Users/hardy/AndroidStudioProjects/github/mine/KOOM_LE/koom-fast-dump/.cxx/Debug/5r3u742m/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/hardy/Library/Android/sdk/cmake/3.18.1/bin/ninja",
+    "-C",
+    "/Users/hardy/AndroidStudioProjects/github/mine/KOOM_LE/koom-fast-dump/.cxx/Debug/5r3u742m/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "koom-fast-dump::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "x86",
+      "artifactName": "koom-fast-dump",
+      "output": "/Users/hardy/AndroidStudioProjects/github/mine/KOOM_LE/koom-fast-dump/build/intermediates/cxx/Debug/5r3u742m/obj/x86/libkoom-fast-dump.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/hardy/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/Users/hardy/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}
