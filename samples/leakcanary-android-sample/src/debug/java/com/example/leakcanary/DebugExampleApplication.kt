@@ -1,5 +1,7 @@
 package com.example.leakcanary
 
+import android.os.Build
+import android.os.Debug
 import android.util.Log
 import com.kwai.koom.fastdump.ForkJvmHeapDumper
 import leakcanary.EventListener
@@ -26,9 +28,16 @@ class DebugExampleApplication : ExampleApplication() {
         }
       },
         heapDumper = HeapDumper {
-          Log.d(TAG, "------heapDumper: ")
-          // 核心代码就这一行，注意此方法会等待子进程返回采集结果，不要在UI线程调用！
-          ForkJvmHeapDumper.getInstance().dump(it.absolutePath)
+          if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.TIRAMISU &&
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+          ) {
+            Log.d(TAG, "------heapDumper: thread=${Thread.currentThread()}")
+            // 核心代码就这一行，注意此方法会等待子进程返回采集结果，不要在UI线程调用！
+            ForkJvmHeapDumper.getInstance().dump(it.absolutePath)
+          } else {
+            Debug.dumpHprofData(it.absolutePath)
+          }
+
         })
     }
 

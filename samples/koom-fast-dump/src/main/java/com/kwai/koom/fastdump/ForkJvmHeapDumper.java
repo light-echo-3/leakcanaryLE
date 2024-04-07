@@ -52,7 +52,7 @@ public class ForkJvmHeapDumper implements HeapDumper {
 
   @Override
   public synchronized boolean dump(String path) {
-    Log.i(TAG, "dump " + path);
+    Log.i(TAG, "dump=" + path + ",thread=" + Thread.currentThread());
     if (!sdkVersionMatch()) {
       throw new UnsupportedOperationException("dump failed caused by sdk version not supported!");
     }
