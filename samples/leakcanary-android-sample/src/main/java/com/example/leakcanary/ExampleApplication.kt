@@ -19,9 +19,11 @@ import android.app.Application
 import android.app.Dialog
 import android.app.Service
 import android.os.StrictMode
+import android.util.Log
 import android.view.View
 
 open class ExampleApplication : Application() {
+  private val TAG = "ExampleApplication"
   val leakedViews = mutableListOf<View>()
   val leakedDialogs = mutableListOf<Dialog>()
   val leakedServices = mutableListOf<Service>()
@@ -29,6 +31,10 @@ open class ExampleApplication : Application() {
   override fun onCreate() {
     super.onCreate()
     enabledStrictMode()
+
+    // 初始化配置
+//    DefaultInitTask.init(applicationContext as Application)
+    Log.d(TAG, "------onCreate: ")
   }
 
   private fun enabledStrictMode() {

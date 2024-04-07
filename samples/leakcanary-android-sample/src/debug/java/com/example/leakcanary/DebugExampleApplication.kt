@@ -1,11 +1,15 @@
 package com.example.leakcanary
 
+import android.util.Log
+import com.kwai.koom.fastdump.ForkJvmHeapDumper
 import leakcanary.EventListener
 import leakcanary.EventListener.Event.HeapAnalysisDone
+import leakcanary.HeapDumper
 import leakcanary.LeakCanary
 import org.leakcanary.internal.LeakUiAppClient
 
 class DebugExampleApplication : ExampleApplication() {
+  private val TAG = "DebugExampleApplication"
 
   override fun onCreate() {
     super.onCreate()
@@ -20,7 +24,14 @@ class DebugExampleApplication : ExampleApplication() {
         if (it is HeapAnalysisDone<*>) {
           LeakUiAppClient(this@DebugExampleApplication).sendHeapAnalysis(it.heapAnalysis)
         }
-      })
+      },
+        heapDumper = HeapDumper {
+          Log.d(TAG, "------heapDumper: ")
+          // 核心代码就这一行，注意此方法会等待子进程返回采集结果，不要在UI线程调用！
+          ForkJvmHeapDumper.getInstance().dump(it.absolutePath)
+        })
     }
+
+
   }
 }

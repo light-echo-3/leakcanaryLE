@@ -13,6 +13,7 @@ keeper {
 }
 
 dependencies {
+  implementation projects.samples.koomFastDump
   debugImplementation projects.leakcanary.leakcanaryAndroid
   debugImplementation projects.leakcanary.leakcanaryAppService
   // debugImplementation projects.leakcanary.leakcanaryAndroidStartup
