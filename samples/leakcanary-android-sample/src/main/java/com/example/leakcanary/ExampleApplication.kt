@@ -22,8 +22,8 @@ import android.os.StrictMode
 import android.util.Log
 import android.view.View
 
+private const val TAG = "ExampleApplication"
 open class ExampleApplication : Application() {
-  private val TAG = "ExampleApplication"
   val leakedViews = mutableListOf<View>()
   val leakedDialogs = mutableListOf<Dialog>()
   val leakedServices = mutableListOf<Service>()
