@@ -20,3 +20,6 @@ private val NO_OP_HANDLER = InvocationHandler { _, _, _ ->
 ## debug
 debug开关，官方默认debug模式下，不触发leak检测
 @see leakcanary.internal.DebuggerControl.isDebuggerAttached
+
+## 源码分析
+[LeakCanary源码分析（2.10最新版）](https://juejin.cn/post/7179146545613242429#heading-17)
