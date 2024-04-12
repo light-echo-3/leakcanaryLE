@@ -1,5 +1,5 @@
 
-牛X实现
+## 牛X实现
 @see leakcanary/internal/Objects.kt
 ```kotlin
 
@@ -15,3 +15,8 @@ private val NO_OP_HANDLER = InvocationHandler { _, _, _ ->
 }
 
 ```
+
+
+## debug
+debug开关，官方默认debug模式下，不触发leak检测
+@see leakcanary.internal.DebuggerControl.isDebuggerAttached

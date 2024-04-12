@@ -1,3 +1,6 @@
+
+[README_LE.md](README_LE.md)
+
 # LeakCanary 🐤
 
 A memory leak detection library for Android.

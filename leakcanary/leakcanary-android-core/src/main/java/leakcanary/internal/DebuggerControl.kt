@@ -24,5 +24,9 @@ import android.os.Debug
 internal object DebuggerControl {
 
   val isDebuggerAttached: Boolean
-    get() = Debug.isDebuggerConnected()
+    get() {
+//      return Debug.isDebuggerConnected()
+      //debug开关，官方默认debug模式下，不触发leak检测
+      return false
+    }
 }
