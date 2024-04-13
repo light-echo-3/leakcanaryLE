@@ -1,4 +1,7 @@
 
+
+## demo已实现fork子进程dump堆内存，避免了app冻结
+
 ## 牛X实现
 @see leakcanary/internal/Objects.kt
 ```kotlin
