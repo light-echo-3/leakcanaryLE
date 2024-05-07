@@ -19,6 +19,7 @@ import leakcanary.ReferenceQueueRetainedObjectTracker
 import leakcanary.RetainedObjectTracker
 import leakcanary.RootViewWatcher
 import leakcanary.ServiceWatcher
+import leakcanary.inProcess
 
 class ExampleSetup {
 
@@ -39,7 +40,7 @@ class ExampleSetup {
 
     application.checkRunningInDebuggableBuild()
 
-    val gcTrigger = GcTrigger.Default
+    val gcTrigger = GcTrigger.inProcess()
 
     val handlerThread = HandlerThread(LEAK_CANARY_THREAD_NAME)
     handlerThread.start()
@@ -75,7 +76,7 @@ class ExampleSetup {
       // Or maybe just delete support for support lib.
       FragmentAndViewModelWatcher(application, deletableObjectReporter),
       // TODO should configure this
-      RootViewWatcher(deletableObjectReporter, false),
+      RootViewWatcher(deletableObjectReporter),
       ServiceWatcher(deletableObjectReporter)
     )
 

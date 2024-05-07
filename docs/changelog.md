@@ -3,9 +3,114 @@
 
 Please thank our [contributors](https://github.com/square/leakcanary/graphs/contributors) 🙏 🙏 🙏.
 
+## Version 3.0 Alpha 2 (2024-05-03)
+
+* Deleted the `shark-heap-growth` artifact, the code has been merged into the `shark*` and `leakcanary*` modules.
+* New `leakcanary-android-test` and `leakcanary-android-uiautomator` artifacts.
+* Undo of breaking API changes that were introduced in alpha 1. The goal is to make the upgrade seamless. Please file an issue if you find an API breaking change from a 2.x release.
+* Optimization: for known data structures that don't reference the rest of the graph beyond the references we
+know about, we explore them locally at once and stop enqueuing their internals, which reduces the memory
+footprint and the IO reads.
+* Revamped the heap growth detection APIs, added support for UI Automator and Shark CLI.
+
+### Heap Growth: Espresso test example
+
+Add the dependency:
+
+```groovy
+dependencies {
+  androidTestImplementation 'com.squareup.leakcanary:leakcanary-android-test:3.0-alpha-2'
+}
+```
+
+Ensure your UI tests have enough heap by updating `src/androidTest/AndroidManifest.xml`:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!-- Performing the heap growth analysis in process requires more heap. -->
+  <application
+      android:largeHeap="true"/>
+</manifest>
+```
+
+```kotlin
+class MyEspressoTest {
+  val detector = ObjectGrowthDetector
+    .forAndroidHeap()
+    .repeatingAndroidInProcessScenario()
+
+  @Test
+  fun greeter_says_hello_does_not_leak() {
+    // Runs repeatedly until the heap stops growing or we reach max heap dumps.
+    val heapGrowth = detector.findRepeatedlyGrowingObjects {
+      onView(withId(R.id.name_field)).perform(typeText("Steve"))
+      onView(withId(R.id.greet_button)).perform(click())
+      onView(withText("Hello Steve!")).check(matches(isDisplayed()))
+    }
+
+    assertThat(heapGrowth.growingObjects).isEmpty()
+  }
+}
+```
+
+### Heap Growth: UI Automator test example.
+
+Add the dependency:
+
+```groovy
+dependencies {
+  androidTestImplementation 'com.squareup.leakcanary:leakcanary-android-uiautomator:3.0-alpha-2'
+}
+```
+
+```kotlin
+class MyUiAutomatorTest {
+  val detector = ObjectGrowthDetector
+    .forAndroidHeap()
+    .repeatingUiAutomatorScenario()
+
+  @Test
+  fun clicking_welcome_does_not_leak() {
+    val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+    // Runs repeatedly until the heap stops growing or we reach max heap dumps.
+    val heapGrowth = detector.findRepeatedlyGrowingObjects {
+      device.findObject(By.text("Welcome!")).click()
+    }
+
+    assertThat(heapGrowth.growingObjects).isEmpty()
+  }
+}
+```
+
+### Heap Growth: Shark CLI
+
+Install Shark CLI:
+
+```
+brew install leakcanary-shark
+```
+
+Run the `heap-growth` command:
+
+```
+$ shark-cli -p com.example.app.debug heap-growth
+```
+
+## Version 2.14 (2024-04-17)
+
+* 🐛 [#2650](https://github.com/square/leakcanary/issues/2650) Removed accidental usage of `SettableFuture`, a `WorkManager` internal class, which will be removed in a **future release** of WorkManager. After updating WorkManager to that future release, **all versions of LeakCanary from 2.8 to 2.13 will crash on leak analysis**. To avoid a nasty surprise in the near future, **update to LeakCanary 2.14**.
+* 🔨 [#2660](https://github.com/square/leakcanary/pull/2660) Add proguard mapping support for LeakCanary release.
+* 🐛 [#2531](https://github.com/square/leakcanary/issues/2531) Heap dump & leak lists not preserving list position when navigating.
+* 🐤 [#2615](https://github.com/square/leakcanary/pull/2615) Automatic fix of AOSP PermissionControllerManager leak ([issuetracker.google.com/issues/318415056](https://issuetracker.google.com/issues/318415056)).
+* 🐤 [#2559](https://github.com/square/leakcanary/issues/2559) Ignore `UiModeManager` AOSP leak.
+* 💥 [#2643](https://github.com/square/leakcanary/issues/2643) Fixed rare crash on RenderHeapDumpScreen.
+
 ## Version 3.0 Alpha 1 (2024-01-09)
 
-These alpha releases mark the start of the work on LeakCanary 3. It's not stable! While I intend to rework some APIs, I also want to minimize migration work. The best way to ensure migrations will go smoothly is to try upgrading to a 3.0 alpha and to let me know if you get any compile or runtime error.
+This alpha release marks the start of the work on LeakCanary 3. It's not stable! While I intend to rework some APIs, I also want to minimize migration work. The best way to ensure migrations will go smoothly is to try upgrading to a 3.0 alpha and to let me know if you get any compile or runtime error.
 
 ### Heap Growth
 
