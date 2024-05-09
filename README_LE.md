@@ -32,4 +32,4 @@ https://blog.csdn.net/stone_cold_cool/article/details/120645631
 https://juejin.cn/post/7043755844718034958
 
 这个网站文档还挺全
-[6LEAKCANARY2ANALYZE](https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/6leakcanary2analyze/)
+[apm/性能优化/内存优化](https://huanle19891345.github.io/en/android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/6leakcanary2analyze/)
