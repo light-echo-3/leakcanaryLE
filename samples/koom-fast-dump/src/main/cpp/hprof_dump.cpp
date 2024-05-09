@@ -118,7 +118,7 @@ pid_t HprofDump::SuspendAndFork() {
   pid_t pid = fork();
   if (pid == 0) {
     // Set timeout for child process
-    alarm(60);
+    alarm(60);//这里设置60秒超时，如果60秒内没dump完，进程会退出，导致dump失败（这是debug的时候，经常导致失败的原因）
     prctl(PR_SET_NAME, "forked-dump-process");
   }
   return pid;
@@ -136,13 +136,15 @@ bool HprofDump::ResumeAndWait(pid_t pid) {
   }
   int status;
   for (;;) {
+      //阻塞等待子进程退出，子进程退出，waitpid会返回子进程pid
     if (waitpid(pid, &status, 0) != -1) {
+        //检查是否正常退出
       if (!WIFEXITED(status)) {
         ALOGE("Child process %d exited with status %d, terminated by signal %d",
               pid, WEXITSTATUS(status), WTERMSIG(status));
-        return false;
+        return false;//异常退出，返回false
       }
-      return true;
+      return true;//正常退出，返回true
     }
     // if waitpid is interrupted by the signal,just call it again
     if (errno == EINTR){

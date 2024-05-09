@@ -33,8 +33,8 @@ class DebugExampleApplication : ExampleApplication() {
           ) {
             Log.d(TAG, "------heapDumper: thread=${Thread.currentThread()}")
             // 核心代码就这一行，注意此方法会等待子进程返回采集结果，不要在UI线程调用！
-//            ForkJvmHeapDumper.getInstance().dump(it.absolutePath)
-            Debug.dumpHprofData(it.absolutePath)
+            ForkJvmHeapDumper.getInstance().dump(it.absolutePath)
+//            Debug.dumpHprofData(it.absolutePath)
           } else {
             Debug.dumpHprofData(it.absolutePath)
           }

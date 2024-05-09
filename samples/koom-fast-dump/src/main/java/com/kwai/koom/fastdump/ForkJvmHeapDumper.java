@@ -65,16 +65,18 @@ public class ForkJvmHeapDumper implements HeapDumper {
     boolean dumpRes = false;
     try {
       Log.i(TAG, "before suspend and fork.");
+      //挂起ART虚拟机，并fork一个子进程
       int pid = suspendAndFork();
-      if (pid == 0) {
+      if (pid == 0) {//pid=0代表子进程
         // Child process
         Log.i(TAG, "子进程-begin");
-        Debug.dumpHprofData(path);
+        Debug.dumpHprofData(path);//在子进程中dump hropf
         Log.i(TAG, "子进程-end");
         exitProcess();
       } else if (pid > 0) {
         Log.i(TAG, "主进程-continue-begin");
         // Parent process
+        //恢复虚拟机运行，然后阻塞等待子进程退出
         dumpRes = resumeAndWait(pid);
         Log.i(TAG, "dump " + dumpRes + ", notify from pid " + pid);
         Log.i(TAG, "主进程-continue-end");
