@@ -9,8 +9,8 @@ https://github.com/light-echo-3/leakcanaryLE
 参照koom方案，fork子进程后，在子进程中dump堆快照，避免长时间冻结主进程。
 
 ## 引入koom相关模块：
-samples/koom-fast-dump
-samples/kwai-android-base
+samples/koom-fast-dump  
+samples/kwai-android-base  
 
 ## 具体实现
 - com.example.leakcanary.DebugExampleApplication
