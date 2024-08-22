@@ -2,10 +2,10 @@
 
 # leakcanary：实现fork子进程dump堆快照，避免app冻结
 
-相关项目：
-https://github.com/light-echo-3/KOOM_LE
-https://github.com/light-echo-3/leakcanaryLE
-
+相关项目：  
+https://github.com/light-echo-3/KOOM_LE  
+https://github.com/light-echo-3/leakcanaryLE  
+  
 参照koom方案，fork子进程后，在子进程中dump堆快照，避免长时间冻结主进程。
 
 ## 引入koom相关模块：
